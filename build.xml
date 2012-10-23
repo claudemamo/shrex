@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+
+<project name="shrex" default="compile" basedir=".">
+
+
+   <!-- ================================================================== -->
+   <!-- Initialization of all property settings                            -->
+   <!-- ================================================================== -->
+
+   <target name="init">
+         
+      <property name="build.dir" location="build"/>
+      <property name="class.dir" location="build/classes"/>
+      <property name="lib.dir"   location="lib"/>
+      <property name="src.dir"   location="src"/>
+      <property name="doc.dir"   location="doc"/>
+      
+      <property name="xml-apis.jar" location="${lib.dir}/xml-apis.jar"/>
+      <property name="xercesImpl.jar" location="${lib.dir}/xercesImpl.jar"/>
+      <property name="db2java.zip" location="${lib.dir}/db2java.zip"/>
+      <property name="mysqljava.jar" location="${lib.dir}/mysqljava.jar"/>
+      <property name="commons-jxpath-1.1.jar" location="${lib.dir}/commons-jxpath-1.1.jar"/>
+      <property name="shrex.jar" location="${lib.dir}/shrex.jar"/>
+    
+      <path id="classpath">
+        <pathelement path="${xml-apis.jar}"/>
+        <pathelement path="${xercesImpl.jar}"/>
+        <pathelement path="${commons-jxpath-1.1.jar}"/>   
+        <pathelement path="${shrex.jar}"/>   
+        <pathelement path="${db2java.zip}"/>
+        <pathelement path="${mysqljava.jar}"/>
+      </path>
+
+   </target>
+
+
+   <!-- ================================================================== -->
+   <!-- Removes all created files and directories                          -->
+   <!-- ================================================================== -->
+
+   <target name="clean" depends="init">
+      <delete dir="${build.dir}"/>
+      <delete dir="${doc.dir}/javadoc"/>
+      <delete file="${lib.dir}/shrex.jar"/>
+   </target>
+
+   <target name="cleanBuild" depends="init">
+      <delete dir="${build.dir}"/>
+   </target>
+
+   <!-- ================================================================== -->
+   <!-- Makes sure the needed directory structure is in place              -->
+   <!-- ================================================================== -->
+
+   <target name="prepare" depends="init">
+      <mkdir dir="${build.dir}"/>
+      <mkdir dir="${class.dir}"/>
+   </target>
+ 
+
+
+   <!-- ================================================================== -->
+   <!-- Compilation of the application                                     -->
+   <!-- ================================================================== -->
+
+   <target name="compile" depends="prepare">
+     <javac destdir="${class.dir}" debug="on"
+            classpathref="classpath">
+       <src path="${src.dir}"/>
+       <exclude name="edu/ogi/cse/xs/database/db2/**"/>
+       <exclude name="edu/ogi/cse/xs/database/mysql/**"/>
+       <exclude name="edu/ogi/cse/xs/database/oracle/**"/>
+     </javac>
+ 
+     <jar jarfile="${shrex.jar}"
+          basedir="${class.dir}"/>
+   </target>
+
+
+   
+   <!-- ================================================================== -->
+   <!--  java doc                                                          -->
+   <!-- ================================================================== -->
+   <target name="javadoc" depends="compile">
+    <mkdir dir="${doc.dir}/javadoc"/>
+    <javadoc destdir="${doc.dir}/javadoc" sourcepath="${src.dir}" classpathref="classpath">
+      <package name="edu.ogi.cse.xs.common"/>
+      <package name="edu.ogi.cse.xs.conf"/>
+      <package name="edu.ogi.cse.xs.xsd"/>
+      <package name="edu.ogi.cse.xs.xsd.xerces"/>
+      <package name="edu.ogi.cse.xs.relschema"/>
+      <package name="edu.ogi.cse.xs.database"/>
+      <package name="edu.ogi.cse.xs.database.db2"/>
+      <package name="edu.ogi.cse.xs.database.mysql"/>
+      <package name="edu.ogi.cse.xs.database.oracle"/>
+      <package name="edu.ogi.cse.xs.database.file"/>
+      <package name="edu.ogi.cse.xs.mapping"/>
+      <package name="edu.ogi.cse.xs.loader"/>
+      <package name="edu.ogi.cse.xs.query"/>
+    </javadoc>
+   </target>
+
+
+ 
+   <!-- ================================================================== -->
+   <!-- build zip file                                                     -->
+   <!-- ================================================================== -->
+   
+   <target name="zipIt" depends="compile, cleanBuild">
+      <zip destfile="../shrex.zip"
+       basedir="../"
+       includes="shrex/**"
+       excludes="shrex/doc/**, **/CVS"
+      />
+   </target>
+
+
+   <target name="zipDoc" depends="javadoc">
+      <zip destfile="../doc.zip"
+       basedir="./"
+       includes="doc/**"
+      />
+   </target>
+
+
+   
+</project>
+
+

@@ -1,0 +1,34 @@
+==========================
+1. What is in the package
+===========================
+conf: system configuration file.
+data: contain a set of example XML schema and document files
+doc: a howto document for users, javadoc for developers
+image: containing image resources used by GUI
+lib: shrex.jar
+log: the place to hold "create table" statements and "tuples". Empty initially
+src: the source code 
+
+
+
+==========================
+2. Platform
+===========================
+The software has been tested in the following Unix system: Linux and Solaris.
+It is supposed to run on Windows too
+
+
+
+==========================
+3. Requirement
+===========================
+
+JDK 
+
+
+
+==========================
+4. get started
+===========================
+
+http://shrex.sourceforge.net/

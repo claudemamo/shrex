@@ -1,0 +1,60 @@
+<?xml version="1.0"?> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.cse.ogi.edu/test" 
+        elementFormDefault="qualified" 
+        xmlns:test="http://www.cse.ogi.edu/test"
+	xmlns:xs="http://www.cse.ogi.edu/xs"> 
+<!-- example of a schema of union distribution -->
+
+  <element name="IMDB" type="test:IMDBType"/>
+
+  <complexType name="IMDBType">
+    <sequence>
+      <element name="SHOW" type="test:SHOWType"
+	       minOccurs="0"
+	       maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="SHOWType">
+    <choice>
+	<group ref="test:Movie"
+	   xs:outline="true"
+	   xs:tablename="Movie"/>
+	<group ref="test:TV"
+           xs:outline="true"
+	   xs:tablename="TV"/>
+    </choice>
+  </complexType>
+
+
+  <group name="Movie">
+	<sequence>
+           <element name="TITLE" type="integer"/>
+           <element name="YEAR" type="integer"/>
+           <element name="BOXOFFICE" type="integer"/>	
+           <element name="REVIEW" type="integer"
+	            minOccurs="0"
+	            maxOccurs="unbounded"
+		    xs:tablename="MovieReview"/>    
+        </sequence> 
+
+  </group>
+
+
+  <group name="TV">
+	<sequence>
+           <element name="TITLE" type="integer"/>
+           <element name="YEAR" type="integer"/>
+ 	   <element name="SEASONS" type="string"/>       
+           <element name="REVIEW" type="integer"
+	            minOccurs="0"
+	            maxOccurs="unbounded"
+		    xs:tablename="TVReview"/>
+        </sequence> 
+  </group>
+
+
+</schema>
+
+

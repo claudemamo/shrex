@@ -1,0 +1,85 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.8 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>ShreX: A Comprehensive Solution to the XML-to-Relational
+Mapping Problem</title>
+</head>
+<body>
+
+<h1>
+ShreX: A Comprehensive Solution to the XML-to-Relational Mapping Problem</h1>
+
+<h3>
+Introduction</h3>
+XML is becoming the predominant data exchange format in a variety of application
+domains ( supply-chain, scientific data processing, telecommunication infrastructure).&nbsp;
+By relying on relational storage, XML developers can benefit from a complete
+set of data management services and from the highly optimized relational
+query processors.&nbsp; In order to store XML data in a RDBMS, it is necessary
+first that an XML-to-relational mapping be defined.&nbsp; Once a mapping
+is selected, XML documents must be appropriately shredded and loaded into
+the database.&nbsp; Finally, queries over the XML documents must be translated
+into SQL queries over the mapped relations.
+<p>ShreX provides a generic mechanism for specifying mappings, shredding
+and querying XML documents.&nbsp; The shredding component accepts as inputs
+an annotated XML Schema and XML documents, and outputs <i>CREATE TABLE
+</i>statements,
+and tuples to populate the tables.&nbsp; The system provides a point-and-click
+(Java-based) GUI to help users perform storage operations and define mappings.&nbsp;
+The GUI&nbsp; shows visually the correspondence between the XML schema
+elements and their counterparts in generated relational schema.
+<p>ShreX can be used with virtually any relational database.&nbsp; The
+system was written in Java.&nbsp; Xerces is used to parse and shred XML
+documents.&nbsp; Shrex has been tested with DB2 and MySQL.
+<br>&nbsp;
+<h3>
+Documentation and Publications</h3>
+
+<ul>
+<li>
+<a href="howto/howto.html">Shrex: Get Started</a></li>
+
+<li>
+<a href="javadoc/index.html">ShreX: ava Doc</a></li>
+
+<li>
+<a href="howto/widm.pdf">ShreX: A Comprehensive Solution to the XML-to-Relational
+Mapping Problem</a> (by Sihem Amer-Yahia, Fang Du and Juliana Freire )&nbsp;
+In Proceedings of WIDM, 2004.</li>
+
+<li>
+<a href="howto/vldb.pdf">ShreX: Managing XML Documents in Relational Databases</a>
+(by Fang Du, Sihem Amer-Yahia and Juliana Freire ) In Proceedings of VLDB
+Demonstration, 2004.</li>
+
+<li>
+<a href="howto/techReport.pdf">ShreX:&nbsp; A Generic and Flexible Framework
+for Mapping XML Documents to Relations</a> (by Sihem Amer-Yahia, Fang Du
+and Juliana Freire ) OG I Technical report, 2003.</li>
+</ul>
+
+<h3>
+Download</h3>
+Please download from&nbsp; <a href="http://sourceforge.net/projects/shrex">SourceForge
+ShreX project</a> page.
+<br>&nbsp;
+<h3>
+People</h3>
+
+<ul>
+<li>
+<a href="http://www.research.att.com/%7Esihem/">Sihem Amer-Yahia</a></li>
+
+<li>
+<a href="mailto:fangdu1@yahoo.com">Fang Du</a></li>
+
+<li>
+<a href="http://www.cse.ogi.edu/%7Ejuliana">Juliana Freire</a></li>
+</ul>
+
+<hr>
+<br>Last modified: July 13, 2005
+</body>
+</html>

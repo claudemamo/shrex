@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.cse.ogi.edu/fangdu-indstudy"
+        elementFormDefault="qualified"
+        xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"
+        xmlns:rel="http://www.cse.ogi.edu/fangdu-indstudy">
+
+        <!-- author: Fang Du: persisted relational schema -->   
+
+        <element name="tableData" type="rel:tableDataType"/>
+
+        <complexType name="tableDataType">
+          <sequence>
+            <element name="row" type="string" minOccurs="0" maxOccurs="unbounded"/>  
+          </sequence>
+        </complexType>
+</schema>
+	
+
+
+

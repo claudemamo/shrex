@@ -1,0 +1,33 @@
+<?xml version="1.0"?> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.cse.ogi.edu/test" 
+        elementFormDefault="qualified" 
+        xmlns:test="http://www.cse.ogi.edu/test"
+	xmlns:shrex="http://www.cse.ogi.edu/shrex"> 
+
+  <element name="IMDB" type="test:IMDBType"/>
+
+  <complexType name="IMDBType"> 
+    <sequence>
+      <element name="SHOW" type="test:SHOWType"
+	       minOccurs="0"
+	       maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+
+  <complexType name="SHOWType">
+    <sequence> 
+      <element name="TITLE" type="integer"/>
+      <element name="YEAR" type="integer"/>
+      <choice>
+	<element name="BOXOFFICE" type="integer"/>
+	<element name="SEASONS" type="string"/>
+      </choice>
+      <element name="REVIEW" type="integer"
+	       minOccurs="0"
+	       maxOccurs="unbounded"/>
+    </sequence> 
+  </complexType> 
+
+</schema>

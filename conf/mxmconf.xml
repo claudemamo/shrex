@@ -1,0 +1,83 @@
+<!-- author: Fang Du -->   
+<!--MXM loader configuration file-->
+	
+
+<MXMConfiguration
+  xmlns="http://www.cse.ogi.edu/fangdu-indstudy"
+  xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+>
+
+  <section name="DataBase">
+
+    <!-- file based -->
+    <property name="dbname" value="file"/>
+    <property name="driver" value="file"/>
+    <property name="url" value="."/>
+    <property name="user" value="whatever"/>
+    <property name="passwd" value="whatever"/>
+
+    <!-- connect to database "xs"
+         at "localhost" default port with username "mysql" and no passwd 
+    -->
+    <!--
+    <property name="dbname" value="MYSQL"/>
+    <property name="driver" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost/xs"/>
+    <property name="user" value="mysql"/>
+    <property name="passwd" value="welcome"/>
+    -->
+
+    <!-- ibm db -->
+    <!--
+    <property name="dbname" value="db2"/>
+    <property name="driver" value="COM.ibm.db2.jdbc.app.DB2Driver"/>
+    <property name="url" value="jdbc:db2:xs"/>
+    <property name="user" value="db2inst1"/>
+    <property name="passwd" value="xxxxxxxxx"/>
+   --> 
+    <!-- oralce db -->
+    <!--
+    <property name="dbname" value="oracle"/>
+    <property name="driver" value="to be added"/>
+    <property name="connstr" value="jdbc:oracle:thin:@localhost:1521:o817"/>
+    <property name="user" value="scott"/>
+    <property name="passwd" value="tiger"/>
+    -->
+
+    <property name="dumpDBTables" value="true"/>
+    <property name="dumpDBData" value="true"/>
+    <property name="bulkloading" value="false"/>
+    <property name="doInProcessBulkloading" value="false"/>
+    <property name="tableDataSeparator" value=";"/>
+
+    <property name="defaultVarcharLength" value="128"/>
+    <property name="defaultNumberLength" value="12"/>
+  </section>
+
+
+  <section name="XMLParser">
+    <property name="parsername" value="xerces"/>
+    <!--
+    <property name="parsername" value="oracle"/>
+    -->
+  </section>
+
+  <section name="XMLSchema">
+    <property name="namespace" value="http://www.cse.ogi.edu/fangdu-indstudy"/>
+  </section>
+
+
+  <SQLTypeLenSpec>
+      <item>
+	<source>IMDB:SHOW:REVIEW</source>
+	<length>512</length>
+      </item>  
+      <item>
+	<source>IMDB:SHOW:YEAR</source>
+	<length>4</length>
+      </item>
+  </SQLTypeLenSpec>
+
+</MXMConfiguration>
+
+

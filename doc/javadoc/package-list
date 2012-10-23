@@ -1,0 +1,12 @@
+edu.ogi.cse.xs.common
+edu.ogi.cse.xs.conf
+edu.ogi.cse.xs.database
+edu.ogi.cse.xs.database.db2
+edu.ogi.cse.xs.database.file
+edu.ogi.cse.xs.database.mysql
+edu.ogi.cse.xs.loader
+edu.ogi.cse.xs.mapping
+edu.ogi.cse.xs.query
+edu.ogi.cse.xs.relschema
+edu.ogi.cse.xs.xsd
+edu.ogi.cse.xs.xsd.xerces

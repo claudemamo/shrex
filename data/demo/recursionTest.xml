@@ -1,0 +1,29 @@
+<A   xmlns="http://www.cse.ogi.edu/test"
+     xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+     attrA = "aaa1">
+
+
+  <B attrB = "bbb2">
+    <A attrA = "aaa2"/>
+  </B>
+
+
+  <B attrB = "bbb3">
+    <C attrC = "ccc3">
+      <D attrD = "ddd3">
+        <A attrA = "aaa3"/>
+      </D>
+    </C>
+  </B>
+
+
+  <B attrB = "bbb4">
+    <A attrA = "aaa4">
+      <B attrB = "bbb5">
+        <A attrA = "aaa5"/>
+      </B>
+    </A>
+  </B>
+
+
+</A>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.imdb.com" 
+        elementFormDefault="qualified" 
+        xmlns:imdb="http://www.imdb.com"
+	xmlns:shrex="http://www.cse.ogi.edu/shrex"> 
+
+
+	<element name="IMDB" type="imdb:Imdb" shrex:identityscheme="KFO"/>
+
+	<complexType name="Imdb">
+		<sequence>
+			<element name="SHOW" type="imdb:Show" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="DIRECTOR" type="imdb:Director" 
+			         minOccurs="0" maxOccurs="unbounded"/>
+			<element name="ACTOR" type="imdb:Actor" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Show">
+		<sequence>
+			<element name="TITLE" type="imdb:Title"/>
+			<element name="YEAR" type="imdb:Year"/>
+                       	 <choice>
+	                     	<element name="MOVIE" type="imdb:Movie"/>
+                                <element name="TV" type="imdb:Tv"/>
+                         </choice>
+			<element name="AKA" type="imdb:Aka" minOccurs="0" maxOccurs="unbounded" shrex:outline="false"/>
+			<element name="REVIEW" type="imdb:Review" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Title">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="Year">
+		<restriction base="integer">
+			<minInclusive value="1900"/>
+			<maxInclusive value="2003"/>
+		</restriction>
+	</simpleType>
+	<complexType name="Tv">
+		<sequence>
+			<element name="SEASONS" type="imdb:Seasons"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Seasons">
+		<restriction base="string"/>
+	</simpleType>
+	<complexType name="Movie">
+		<sequence>
+			<element name="BOXOFFICE" type="imdb:Boxoffice"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Boxoffice">
+		<restriction base="integer"/>
+	</simpleType>
+	<simpleType name="Aka">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="Review">
+		<restriction base="string"/>
+	</simpleType>
+
+	<complexType name="Director">
+		<sequence>
+			<element name="NAME" type="imdb:Name"/>
+			<element name="DIRECTED" type="imdb:Directed" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Name">
+		<restriction base="string"/>
+	</simpleType>
+	<complexType name="Directed">
+		<sequence>
+			<element name="TITLE" type="imdb:Title"/>
+			<element name="YEAR" type="imdb:Year"/>
+			<element name="INFO" type="imdb:Info"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Info">
+		<restriction base="string"/>
+	</simpleType>
+
+	<complexType name="Actor">
+		<sequence>
+			<element name="NAME" type="imdb:Name"/>
+			<element name="BIOGRAPHY" type="imdb:Biography"/>
+			<element name="PLAYED" type="imdb:Played" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Biography">
+		<sequence>
+			<element name="BIRTHDATE" type="imdb:Birthdate"/>
+			<element name="TEXT" type="anyType"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Birthdate">
+		<restriction base="string"/>
+	</simpleType>
+<!--
+	<simpleType name="Text">
+		<restriction base="string"/>
+	</simpleType>
+-->
+	<complexType name="Played">
+		<sequence>
+			<element name="TITLE" type="imdb:Title"/>
+			<element name="YEAR" type="imdb:Year"/>
+			<element name="CHARACTER" type="imdb:Character" shrex:fieldname="cha"/>
+		</sequence>
+	</complexType>
+	<simpleType name="Character">
+		<restriction base="string"/>
+	</simpleType>
+</schema>
+
+
+
+
+

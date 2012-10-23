@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.cse.ogi.edu/fangdu-indstudy"
+        elementFormDefault="qualified"
+        xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"
+        xmlns:rel="http://www.cse.ogi.edu/fangdu-indstudy">
+
+        <!-- author: Fang Du: persisted relational schema -->   
+
+        <element name="relSchema" type="rel:relSchemaType"/>
+
+        <complexType name="relSchemaType">
+          <sequence>
+            <element name="table" type="rel:tableType" minOccurs="0" maxOccurs="unbounded"/>  
+          </sequence>
+        </complexType>
+
+
+        <complexType name="tableType">
+          <sequence>
+            <element name="field" type="rel:fieldType" minOccurs="0" maxOccurs="unbounded"/>  
+          </sequence>
+	<attribute name="name" type="string" use="required"/>
+        </complexType>
+
+
+        <complexType name="fieldType">          
+	  <attribute name="name" type="string" use="required"/>
+	  <attribute name="sqlType" type="string" use="required"/>
+          <attribute name="len" type="int" use="optional"/>
+          <attribute name="isNullable" type="boolean" use="required"/>
+          <attribute name="isPrimaryKey" type="boolean" use="required"/>
+          <attribute name="isForeignKey" type="boolean" use="required"/>
+          <attribute name="refTableName" type="string" use="optional"/>
+        </complexType>
+
+</schema>
+	
+
+
+

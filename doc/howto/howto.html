@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+  <meta name="GENERATOR"
+ content="Mozilla/4.8 [en] (Windows NT 5.0; U) [Netscape]">
+  <title>ShreX: Getting Started</title>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(244, 244, 255);"
+ alink="#ff0000" link="#0000ee" vlink="#551a8b">
+<center>
+<h1><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;</font><tt>
+ShreX: Getting
+Started</tt></h1>
+</center>
+<h2>
+About the Guide</h2>
+This guide provides information about using ShreX.&nbsp; A hands-on
+tutorial
+is given to help you to start using the GUI.
+<br>
+ShreX is a tool developed for proof of concept.&nbsp; There is no
+gurantee
+that the system will function properly in the scenarios other than
+described
+in the example.&nbsp; Users are welcome to further explore the
+features,
+fix bugs, and enhance its functionality through working with its source
+code.
+<br>
+&nbsp;
+<ul>
+  <li> <a href="#1" class="toc">1. </a><a href="#1" class="toc">Example</a></li>
+  <li> <a href="#2" class="toc">2. Working With ShreX</a></li>
+  <ul>
+    <li> <a href="#2.1" class="toc">2.1 Install and Launch ShreX GUI</a></li>
+    <li> <a href="#2.2" class="toc">2.2 XML Schema Mapping</a></li>
+    <ul>
+      <li> <a href="#2.2.1" class="toc">2.2.1 Open the schema</a></li>
+      <li> <a href="#2.2.2" class="toc">2.2.2 View Schema Informaiton</a></li>
+      <li> <a href="#2.2.3" class="toc">2.2.3 View XML-to-Relational
+Mapping Information</a></li>
+      <li> <a href="#2.2.4" class="toc">2.2.4 View Generated
+Relational
+Schema</a></li>
+      <li> <a href="#2.2.5" class="toc">2.2.5 Customize the Schema</a></li>
+      <ul>
+      </ul>
+      <li> <a href="#2.2.6" class="toc">2.2.6 Load the Schema</a></li>
+    </ul>
+    <li> <a href="#2.3" class="toc">2.3 Load XML Document</a></li>
+    <li> <a href="#2.4" class="toc">2.4 Query XML Document</a></li>
+  </ul>
+  <li> <a href="#3">3. Relational DataBase Plugins</a></li>
+  <li> <a href="#4">4. Related Document<br>
+    </a></li>
+</ul>
+<hr width="100%">
+<h2><a name="1"></a>1.Example</h2>
+Throughout the guide, we use the following IMDB example to illustrate
+how
+to work with ShreX GUI.
+<p>XML Schema:
+<table bgcolor="#ffffcc" border="1" cols="1" width="100%">
+  <tbody>
+    <tr>
+      <td>&lt;?xml version="1.0"?&gt;&nbsp; <br>
+&lt;schema xmlns="http://www.w3.org/2001/XMLSchema"&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+targetNamespace="http://www.cse.ogi.edu/test"&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+elementFormDefault="qualified"&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xmlns:test="http://www.cse.ogi.edu/test" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xmlns:shrex="http://www.cse.ogi.edu/shrex"&gt;&nbsp;
+      <p>&nbsp; &lt;element name="IMDB" type="test:IMDBType"/&gt; </p>
+      <p>&nbsp; &lt;complexType name="IMDBType"&gt;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &lt;sequence&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="SHOW"
+type="test:SHOWType" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; minOccurs="0" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maxOccurs="unbounded"/&gt; <br>
+&nbsp;&nbsp;&nbsp; &lt;/sequence&gt; <br>
+&nbsp; &lt;/complexType&gt; </p>
+      <p>&nbsp; &lt;complexType name="SHOWType"&gt; <br>
+&nbsp;&nbsp;&nbsp; &lt;sequence&gt;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="TITLE"
+type="integer"/&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="YEAR"
+type="integer"/&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;choice&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="BOXOFFICE"
+type="integer"/&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="SEASONS"
+type="string"/&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/choice&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="REVIEW" type="integer"
+minOccurs="0" maxOccurs="unbounded"/&gt; <br>
+&nbsp;&nbsp;&nbsp; &lt;/sequence&gt;&nbsp; <br>
+&nbsp; &lt;/complexType&gt;&nbsp; <br>
+&lt;/schema&gt;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>XML Document:
+<table bgcolor="#ffffcc" border="1" cols="1" width="100%">
+  <tbody>
+    <tr>
+      <td>&lt;IMDB&nbsp;&nbsp; xmlns="http://www.cse.ogi.edu/test" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xmlns:xsi =
+"http://www.w3.org/2001/XMLSchema-instance"&gt;
+      <p>&lt;SHOW&gt; <br>
+&lt;TITLE&gt;1&lt;/TITLE&gt; <br>
+&lt;YEAR&gt;2&lt;/YEAR&gt; <br>
+&lt;BOXOFFICE&gt;3&lt;/BOXOFFICE&gt; <br>
+&lt;REVIEW&gt;4&lt;/REVIEW&gt; <br>
+&lt;REVIEW&gt;5&lt;/REVIEW&gt; <br>
+&lt;/SHOW&gt; </p>
+      <p>&lt;SHOW&gt; <br>
+&lt;TITLE&gt;6&lt;/TITLE&gt; <br>
+&lt;YEAR&gt;7&lt;/YEAR&gt; <br>
+&lt;BOXOFFICE&gt;8&lt;/BOXOFFICE&gt; <br>
+&lt;REVIEW&gt;9&lt;/REVIEW&gt; <br>
+&lt;REVIEW&gt;10&lt;/REVIEW&gt; <br>
+&lt;REVIEW&gt;11&lt;/REVIEW&gt; <br>
+&lt;/SHOW&gt; </p>
+      <p>&lt;SHOW&gt; <br>
+&lt;TITLE&gt;12&lt;/TITLE&gt; <br>
+&lt;YEAR&gt;13&lt;/YEAR&gt; <br>
+&lt;SEASONS&gt;S14&lt;/SEASONS&gt; <br>
+&lt;REVIEW&gt;15&lt;/REVIEW&gt; <br>
+&lt;REVIEW&gt;16&lt;/REVIEW&gt; <br>
+&lt;REVIEW&gt;17&lt;/REVIEW&gt; <br>
+&lt;/SHOW&gt; </p>
+      <p>&lt;SHOW&gt; <br>
+&lt;TITLE&gt;18&lt;/TITLE&gt; <br>
+&lt;YEAR&gt;19&lt;/YEAR&gt; <br>
+&lt;SEASONS&gt;S20&lt;/SEASONS&gt; <br>
+&lt;REVIEW&gt;21&lt;/REVIEW&gt; <br>
+&lt;/SHOW&gt; </p>
+      <p>&lt;/IMDB&gt;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+&nbsp;
+</p>
+<h2><a name="2"></a>2. Working with ShreX: a tutorial</h2>
+This section went through an example to demonstrate how to customize
+XML-to-relational
+mapping, load generated schema, shred conforming documents into
+relational
+database, and query the stored XML data using XPath.&nbsp; The tutorial
+is based on the Unix environment.&nbsp; Operations in Windows should be
+similar.
+<br>
+&nbsp;
+<h3><a name="2.1"></a>2.1 Install and Launch ShreX GUI</h3>
+The steps to create install and launch ShreX GUI are as follows:
+<ol>
+  <li>unzip shrex.zip to an install directory $INSTALL_DIR$</li>
+  <br>
+&gt;cd $INSTALL_DIR$ <br>
+&gt;unzip shrex.zip
+  <li>compile the source code ( assume <a href="http://ant.apache.org/">ant
+    </a>is
+installed on your machine)</li>
+  <br>
+&gt;cd $INSTALL_DIR$/shrex <br>
+&gt;ant
+  <li>start the GUI</li>
+  <br>
+&gt;cd $INSTALL_DIR$/shrex <br>
+&gt;java -cp
+./lib/xml-apis.jar:./lib/xercesImpl.jar:./lib/shrex.jar:./lib/commons-jxpath-1.1.jar
+gui.XSGui &amp;
+</ol>
+The welcome page of the GUI is shown in Figure 1.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+<br>
+<center>
+<p><img src="imageA0O.JPG" height="500" width="666"><br>
+Figure 1: Welcome Page</p>
+</center>
+<h3>
+<a name="2.2"></a>2.2 XML Schema Mapping</h3>
+<h4>
+<a name="2.2.1"></a>2.2.1 Open a Schema</h4>
+To open a schema, click File-&gt;Open schema, then choose
+data/demo/imdd.xsd
+<br>
+The left pane shows the schema tree, the right pane has five tab
+panels.
+<h4><a name="2.2.2"></a>2.2.2 View Schema Information</h4>
+Click the XML Schema tab.&nbsp; Select an element/attribute in the
+schema
+tree.&nbsp; The corresponding information is displayed in the right
+pane.&nbsp;
+As shown in Figure 2, the informaiton about Title element inside Show
+is
+display in the right pane.
+<center>
+<p><img src="imageL0I.JPG" height="450" width="600"><br>
+Figure 2: Schema Browser</p>
+</center>
+<h4>
+<a name="2.2.3"></a>2.2.3 View XML-to-Relational Mapping</h4>
+The Mappings pane shows the correspondence between XML schema and
+relational
+schema.&nbsp; Figure 3 displays that the Title element inside Show is
+mapped
+to field TITLE in the table IMDB_SHOW.
+<center>
+<p><img src="imageN2F.JPG" height="500" width="666"><br>
+Figure 3: Mapping Browser</p>
+</center>
+<h4>
+<a name="2.2.4"></a>2.2.4 View Generated Relational Schema</h4>
+All the generated relational tables are listed in the Relational Schema
+Pane.&nbsp; View details about a table by clicking its name.
+<center>
+<p><img src="image0DP.JPG" height="500" width="666"><br>
+Figure 4: Generated Relational Schema Browser</p>
+</center>
+<h4>
+<a name="2.2.5"></a>2.2.5 Customize the Schema</h4>
+By default, the opened schema imdb.xsd is mapped to three relational
+tables.
+<br>
+&nbsp;
+<table bgcolor="#ffffcc" border="1" cols="1" width="100%">
+  <tbody>
+    <tr>
+      <td><font size="-1">CREATE TABLE IMDB</font> <br>
+      <font size="-1">(</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; id_ VARCHAR(128) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; PRIMARY KEY (id_)</font> <br>
+      <font size="-1">);</font>
+      <p><font size="-1">CREATE TABLE IMDB_SHOW</font> <br>
+      <font size="-1">(</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; id_ VARCHAR(128) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; pid VARCHAR(128) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; TITLE NUM(12) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; YEAR NUM(12) NOT NULL,</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; BOXOFFICE NUM(12),</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; SEASONS VARCHAR(128),</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; PRIMARY KEY (id_),</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; FOREIGN KEY (pid) REFERENCES
+IMDB</font> <br>
+      <font size="-1">);</font> </p>
+      <p><font size="-1">CREATE TABLE IMDB_SHOW_REVIEW</font> <br>
+      <font size="-1">(</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; id_ VARCHAR(128) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; pid VARCHAR(128) NOT NULL,</font>
+      <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; REVIEW NUM(12),</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; PRIMARY KEY (id_),</font> <br>
+      <font size="-1">&nbsp;&nbsp;&nbsp; FOREIGN KEY (pid) REFERENCES
+IMDB_SHOW</font> <br>
+      <font size="-1">);</font></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>We may customize the mapping in various ways. Go to the Mapping
+Editor
+panel.&nbsp; Made the following changes
+<br>
+as shown in Figure 4:
+</p>
+<p>&nbsp;&nbsp;&nbsp; &lt;element name="TITLE" type="integer"
+shrex:outline="true"/&gt;
+<br>
+&nbsp;&nbsp;&nbsp; &lt;element name="YEAR" type="integer"
+shrex:fieldname="ShowYear"/&gt;
+</p>
+<p>Click&nbsp;<img src="reload.gif" height="23" width="24"> to "save
+and reload"
+schema.
+</p>
+<p>Come back to the Mapping pane.&nbsp; The element Title is now mapped
+to a table, and the element Year is mapped to a field with different
+name
+as shown in Figure 6 and 7.
+</p>
+<center>
+<p><img src="imageKL2.JPG" height="500" width="666"><br>
+Figure 5: Customize through Editor
+</p>
+<p><img src="imageKFG.JPG" height="500" width="666"></p>
+</center>
+<blockquote>
+  <center>Figure 6: Mapping information for element Title after
+customization</center>
+</blockquote>
+<center><img src="image6U6.JPG" height="500" width="666">
+<br>
+Figure 7: Mapping information for element Year after customization</center>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also map the entire document into a single edge table.&nbsp;
+Made the following changes:
+</p>
+<p>&nbsp;&nbsp;&nbsp; &lt;element name="IMDB" type="test:IMDBType"
+shrex:edgemapping="true"/&gt;
+</p>
+<p>Click&nbsp;<img src="reload.gif" height="23" width="24"> to "save
+and reload"
+schema.
+</p>
+<p>Come back to the Relational Schema Pane.&nbsp; There will be only
+one
+table generated as shown in Figure 8.
+</p>
+<center>
+<p><img src="imageSP7.JPG" height="500" width="666"><br>
+Figure 8: Edge Mapping Table</p>
+</center>
+<h4><a name="2.2.6"></a>2.2.6 Load the Schema to Database</h4>
+The steps to load the generated relational table schema to a database
+is
+as follows.&nbsp; Here we assume you load the original schema.&nbsp;
+You
+can also tried to load the customized schema.
+<ol>
+  <li>Click File-&gt;Load Table Schema.</li>
+  <li>Choose the "default" connection and click OK.&nbsp; The default
+database
+connection is defined in ShreX configuration file.&nbsp; In the
+distribution,
+the default connection is set to "File" database, which is a simulated
+database for demo purpose.&nbsp; It does not have query capability.</li>
+  <li>After seeing the verificaiton message, click OK.</li>
+  <br>
+Click Database-&gt;Connections.&nbsp; In the top left pane, the list of
+connections is shown.&nbsp; There is only the default filed-based
+connection
+available.&nbsp; The tables in the default connection are shown in the
+bottom left pane.&nbsp; Since we have not loaded any document, the
+table
+only shows headers in the right pane (See Figure 9).
+</ol>
+<center>
+<p><br>
+<img src="imageJUE.JPG" height="500" width="666"><br>
+Figure 9: Connection page after loading the schema</p>
+</center>
+<h3>
+<a name="2.3"></a>2.3 Load XML Document file-&gt;load docuemnt</h3>
+The steps to load a document conforming to the XML schema is as
+follows:
+<ol>
+  <li>Click File-&gt;Load Document.</li>
+  <li>You will be prompted with a file chooser.&nbsp; Select
+data/demo/imdb.xml</li>
+  <li>Choose the "default" connection and click OK.</li>
+  <li>After seeing the verificaiton message, click OK.</li>
+  <li>Click Database-&gt;Connections.&nbsp; You should be able to see
+the
+loaded
+tuples in the tables (See Figure 10).</li>
+</ol>
+<center>
+<p><br>
+<img src="imageEGN.JPG" height="500" width="666"><br>
+Figure 10: Connection Page After Loading the document</p>
+</center>
+<h3>
+<a name="2.4"></a>2.4 Query XML Document</h3>
+ShreX supports a subset of XPath expression query.&nbsp; In the GUI, if
+users click on the schema tree in the left pane, the path for the
+selected
+node automatically appears in the XPath input field, so users can
+modify
+the path to make a query.&nbsp; For example,if user click the element
+"/IMDB/SHOW/TITLE"
+in the schema tree, the path appears in the right pane immediately.
+<p>There are two buttons in the right pane.&nbsp; Clicking on the
+"translate"&nbsp;&nbsp;&nbsp;
+button displays the generate SQL query.&nbsp; Clicking on the
+"evaluate"
+button, users will be prompted to select a DB connection, then the
+query
+result will be displayed.&nbsp; The translated SQL for
+"/IMDB/SHOW/TITLE"
+is shown in Figure 11.
+<br>
+Since we are using the simulated file-based database, we could not
+actually perform the translated SQL query.
+<br>
+Users might try it with a real database.
+<br>
+&nbsp;
+</p>
+<ul>
+  <img src="imageB28.JPG" height="500" width="666">
+  <center>
+  <p>Figure 11: Query page</p>
+  </center>
+</ul>
+<br>
+&nbsp;
+<h2><a name="3"></a>3. Relational Database Plugin</h2>
+ShreX can work with all relational databases through a common interface
+(See Figure 12).
+<br>
+There are three implementation coming with the distribution: MySQL,
+DB2 and Oracle.&nbsp; Users who wants to use other databases need to
+provide
+their own implementation for the interface
+"edu.ogi.cse.xs.database.DBConnection".
+<center>
+<p><img src="database.gif" height="450" width="535"><br>
+Figure 13: Database Interface</p>
+</center>
+<p><br>
+We show how to connect to a MySQL database.&nbsp; The steps to use DB2
+or Oracle are similar.
+<br>
+&nbsp;
+<span style="font-weight: bold;"><br>
+</span></p>
+<h3><span style="font-weight: bold;">Start GUI with MySQL JDBC lib in
+the Classpath<br>
+</span></h3>
+<h4><span style="font-weight: bold;"></span></h4>
+&gt;java -cp
+./lib/xml-apis.jar:./lib/xercesImpl.jar:./lib/shrex.jar:./lib/commons-jxpath-1.1.jar:./lib/mysqljava.jar
+gui.XSGui &amp;<br>
+<br>
+<h3>Test MySQL Connection</h3>
+It is important to make sure that a mysql connection is available.
+<br>
+There are two ways to test a connection.
+<ol>
+  <li>Use MySQL shell.&nbsp; Enter the shell by providing host, user
+and
+password
+informaiton.</li>
+  <li>Use Java client program to connect to MySQL through JDBC. run</li>
+  <br>
+java -cp ./lib/mysqljava.jar:./lib/xs.jar&nbsp; cmd.TestMysqlConnection
+URL USERNAME PASSWORD <br>
+e.g. <br>
+java -cp ./lib/mysqljava.jar:./lib/xs.jar&nbsp; cmd.TestMysqlConnection
+jdbc:mysql://localhost/xs mysql welcome
+</ol>
+<h3>
+Add MySQL Connection</h3>
+<p>Before loading relational schemas to MySQL database, users need to
+add
+a connection.
+</p>
+<p>&nbsp;&nbsp; click menu "Database"-&gt;"Add a Connection"
+</p>
+<p>&nbsp;you will see a pop-up panel.&nbsp; Fill value for each field:
+</p>
+<ul>
+  <li> <b>connection id</b>: choose whatever you like, for example
+"mydemo"</li>
+  <li> <b>user name</b>: the user name to access the DB, e.g. "mysql"</li>
+  <li> <b>password</b>: the password to access the DB, e.g."welcome"</li>
+  <li> <b>Database URL</b>: the host name and database name, e.g.
+"jdbc:mysql://localhost/xs".&nbsp;
+The "jdbc:mysql://"</li>
+&nbsp; part is fixed for a MySQL connection.&nbsp; If your MySQL
+install
+is not local, you need to&nbsp; replace "localhost" <br>
+&nbsp; with the machine name where the DB is installed.&nbsp; "xs"
+is the database name.
+  <li>&nbsp;<b>Driver</b>: the defualt should be good for MySQL</li>
+</ul>
+Click "add", you will see a new item "mydemo" added to left pane.&nbsp;
+Click "mydemo", if there are any tables in the database, they should
+show
+up.
+<br>
+&nbsp;
+<h2><a name="4"></a>4. Related Documents</h2>
+For more information about ShreX, please see:
+<ol>
+  <li><a href="widm.pdf">ShreX: A Comprehensive Solution to the
+XML-to-Relational
+Mapping Problem</a> <br>
+&nbsp; (by Sihem Amer-Yahia, Fang Du and Juliana Freire ) <br>
+&nbsp; In Proceedings of WIDM, 2004. </li>
+  <li><a href="vldb">ShreX: Managing XML Documents in Relational
+Databases</a> <br>
+&nbsp; (by Fang Du, Sihem Amer-Yahia and Juliana Freire ) <br>
+&nbsp; In Proceedings of VLDB Demonstration, 2004. <br>
+  </li>
+  <li><a href="../javadoc/index.html">Java Doc</a><br>
+  </li>
+  <li><a href="example.html">Customization Example</a></li>
+</ol>
+<p>&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+</p>
+</body>
+</html>

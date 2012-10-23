@@ -1,0 +1,46 @@
+<?xml version="1.0"?> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.cse.ogi.edu/test" 
+        elementFormDefault="qualified" 
+        xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" 
+        xmlns:test="http://www.cse.ogi.edu/test"
+	xmlns:xs="http://www.cse.ogi.edu/xs"> 
+
+<!-- example of recursion -->
+
+  <element name="A" type="test:AType"/>
+
+  
+  <complexType name="AType"> 
+    <sequence> 
+      <element name="B" type="test:BType" minOccurs="0" maxOccurs="unbounded"/> 
+    </sequence> 
+    <attribute name="attrA" type="string" use="required"/>
+  </complexType> 
+
+ 
+  <complexType name="BType"> 
+    <sequence> 
+      <element name="A" type="test:AType" minOccurs="0"/>
+      <element name="C" type="test:CType" minOccurs="0"/> 
+    </sequence>   
+    <attribute name="attrB" type="string" use="required"/>
+  </complexType> 
+
+ 
+  <complexType name="CType"> 
+    <sequence> 
+      <element name="D" type="test:DType"/> 
+    </sequence>   
+    <attribute name="attrC" type="string" use="required"/>
+  </complexType> 
+
+ 
+  <complexType name="DType"> 
+    <sequence> 
+      <element name="A" type="test:AType"/> 
+    </sequence>      
+    <attribute name="attrD" type="string" use="required"/>
+  </complexType> 
+
+</schema>
